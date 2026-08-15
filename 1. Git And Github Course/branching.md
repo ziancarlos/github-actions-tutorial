@@ -29,3 +29,10 @@ Date:   Sat Aug 15 14:30:41 2026 +0700
     initial commit
 
 this will show the master/main branch is behind our new branch/feature branch
+
+
+5. merge a branch into current branch
+example iam in master/main branch i want to merge with feature-restructure branch
+1. git checkout master/main -> if not
+2. git merge <<branch_name>> 
+3.
