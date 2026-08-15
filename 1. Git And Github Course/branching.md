@@ -1,4 +1,4 @@
-# 17. Git Branching
+# 1. Git Branching
 
 Branches allow us to create separate lines of development.
 
@@ -14,7 +14,7 @@ You can work on `feature-restructure` without directly changing the `master` bra
 
 ---
 
-# 18. View Existing Branches
+# 2. View Existing Branches
 
 Use:
 
@@ -45,7 +45,7 @@ currently active branch
 
 ---
 
-# 19. Delete a Branch
+# 3. Delete a Branch
 
 To delete a local branch:
 
@@ -83,7 +83,7 @@ git branch -D feature-restructure
 
 ---
 
-# 20. Create a Feature Branch
+# 4. Create a Feature Branch
 
 A common workflow is to create a branch for a new feature:
 
@@ -113,7 +113,7 @@ The `*` tells you that you are currently working on `feature-restructure`.
 
 ---
 
-# 21. Commit Changes on a Feature Branch
+# 5. Commit Changes on a Feature Branch
 
 After creating the branch, make your changes and commit them:
 
@@ -139,7 +139,7 @@ C = new commit on feature-restructure
 
 ---
 
-# 22. View the Branch History
+# 6. View the Branch History
 
 You can use:
 
@@ -206,7 +206,7 @@ The branches can be visualized as:
 
 ---
 
-# 23. Merge a Branch Into Another Branch
+# 7. Merge a Branch Into Another Branch
 
 Suppose you have:
 
@@ -261,7 +261,7 @@ Because you are currently on `master`, the feature branch is merged **into `mast
 
 ---
 
-# 24. Complete Feature Branch Workflow
+# 8. Complete Feature Branch Workflow
 
 A typical workflow looks like:
 
@@ -311,7 +311,7 @@ In this simple case, Git may perform a **fast-forward merge**, because `master` 
 
 ---
 
-# 25. Important Concept — The Branch You Are Currently On Matters
+# 9. Important Concept — The Branch You Are Currently On Matters
 
 This command:
 
@@ -329,7 +329,7 @@ It means:
 
 For example:
 
-```text
+```bash
 git checkout master
 git merge feature-restructure
 ```
@@ -346,7 +346,7 @@ feature-restructure
 
 Whereas:
 
-```text
+```bash
 git checkout feature-restructure
 git merge master
 ```
