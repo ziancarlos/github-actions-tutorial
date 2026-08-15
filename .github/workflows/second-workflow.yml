@@ -1,0 +1,10 @@
+name: Test Workflow
+on: workflow_dispatch
+jobs: 
+  first-job: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Change Directory
+        run: cd 2.\ Actions\ -\ Blocks\ And\ Components/starting-project/
+      - name: End
+        run: echo "Bye Bye"
