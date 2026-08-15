@@ -14,3 +14,6 @@
 
 ## 5. Creating Simple Worklfow & Manual Trigger Jobs
 [Go to Key Simple Worklfow & Manual Trigger Jobs](./2.%20Actions%20-%20Blocks%20And%20Components/creating-a-simple-workflow.md)
+
+## 6. Types Of Events
+[Go to Types Of Events](./2.%20Actions%20-%20Blocks%20And%20Components/types-of-events.md)
