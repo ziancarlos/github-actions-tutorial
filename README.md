@@ -6,3 +6,6 @@
 
 ## 2. Git Branching Crash Course
 [Go to Git Branching Crash Course](./1.%20Git%20And%20Github%20Course/branching.md)
+
+## 3. Git Remote Crash Course
+[Go to Git Remote Crash Course](./1.%20Git%20And%20Github%20Course/branching.md)
