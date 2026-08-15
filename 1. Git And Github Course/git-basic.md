@@ -503,169 +503,561 @@ This is especially useful when commits have already been pushed to a shared remo
 
 ---
 
-# 13. `git reset --hard` — Move the Branch Back
+# 13. `git reset` — Move the Branch Back
 
-Another way to go back is:
+`git reset` moves the current branch to another commit.
+
+For example:
+
+```text
+A ─── B ─── C
+          ↑
+        HEAD
+```
+
+If you run:
+
+```bash
+git reset B
+```
+
+the branch moves back to `B`:
+
+```text
+A ─── B
+      ↑
+    HEAD
+```
+
+The important part is **what happens to the changes from commit `C`**.
+
+That depends on the reset option.
+
+---
+
+## `git reset --soft`
+
+Use:
+
+```bash
+git reset --soft <commit_id>
+```
+
+`--soft` moves the branch back to the specified commit, but **keeps the changes from the removed commits in the staging area**.
+
+Example:
+
+```text
+Before:
+
+A ─── B ─── C
+          ↑
+        HEAD
+```
+
+Run:
+
+```bash
+git reset --soft B
+```
+
+Now:
+
+```text
+A ─── B
+      ↑
+    HEAD
+
+Staging Area:
+Changes from C ✅
+```
+
+The commit `C` is no longer part of the current branch, but its changes are still staged.
+
+### When is `--soft` useful?
+
+When you think:
+
+> "I made a commit, but I want to undo the commit and modify what I'm going to commit."
+
+For example, you accidentally included `.env`:
+
+```text
+Commit C
+├── app.py
+├── requirements.txt
+└── .env ❌
+```
+
+You can undo the commit while keeping the changes:
+
+```bash
+git reset --soft HEAD~1
+```
+
+Then fix what should be committed and create the commit again.
+
+---
+
+## `git reset --mixed`
+
+If you run:
+
+```bash
+git reset <commit_id>
+```
+
+without specifying an option, Git uses `--mixed` by default.
+
+Example:
+
+```bash
+git reset --mixed B
+```
+
+This:
+
+* Moves the branch back to `B`
+* Keeps the changes in the working directory
+* Removes them from the staging area
+
+```text
+A ─── B
+      ↑
+    HEAD
+
+Working Directory:
+Changes from C ✅
+
+Staging Area:
+Changes from C ❌
+```
+
+So you would need to run `git add` again before committing.
+
+---
+
+## `git reset --hard`
+
+Use:
 
 ```bash
 git reset --hard <commit_id>
 ```
 
-For example:
+`--hard` moves the branch back **and discards the changes from the commits after that point from the working directory and staging area**.
 
-```bash
-git reset --hard 40dd19fae301a9cbdc92e329f4f0bda4e39583fc
-```
-
-Suppose you have:
+Example:
 
 ```text
-A ─── B ─── C ─── D
+Before:
+
+A ─── B ─── C
+          ↑
+        HEAD
 ```
 
-Then:
+Run:
 
 ```bash
 git reset --hard B
 ```
 
-moves the branch back:
+Now:
 
 ```text
 A ─── B
-      ▲
-    master
+      ↑
+    HEAD
 ```
 
-The branch no longer points to `C` or `D`.
-
-Those commits may become unreachable and eventually be garbage-collected by Git.
-
-### Important
-
-`git reset --hard` can also discard **uncommitted changes in your working directory**.
-
-Therefore, be careful when using it.
-
-It is generally not something you want to casually use on commits that have already been shared with other people.
-
----
-
-# 14. `git revert` vs `git reset --hard`
-
-| Command            | What it does                                    |        Original commit remains? | Creates new commit? |
-| ------------------ | ----------------------------------------------- | ------------------------------: | ------------------: |
-| `git revert`       | Creates a new commit that undoes another commit |                             Yes |                 Yes |
-| `git reset --hard` | Moves branch pointer backwards                  | No longer reachable from branch |                  No |
-
-### Simple rule
-
-Use:
-
-```bash
-git revert
-```
-
-when you want to **undo a change while preserving history**.
-
-Use:
-
-```bash
-git reset --hard
-```
-
-when you intentionally want to **move the branch back and discard the commits after that point**.
-
----
-
-# 15. The Basic Git Workflow
-
-The most important workflow to remember is:
+The changes introduced by `C` are removed from:
 
 ```text
-                git add
-Working Directory ────────> Staging Area
-                                  │
-                                  │ git commit
-                                  ▼
-                             Repository
-                                  │
-                                  │ git log
-                                  ▼
-                            Commit History
+Working Directory ❌
+Staging Area       ❌
 ```
 
-In practice:
+### When is `--hard` useful?
+
+When you think:
+
+> "I don't want the changes after this commit anymore. Just put my project back exactly as it was."
+
+⚠️ Be careful with `--hard` because it can permanently discard uncommitted changes.
+
+---
+
+# 14. `--soft` vs `--mixed` vs `--hard`
+
+| Command         | Branch     | Staging Area        | Working Directory |
+| --------------- | ---------- | ------------------- | ----------------- |
+| `reset --soft`  | Moves back | Changes kept staged | Changes kept      |
+| `reset --mixed` | Moves back | Changes unstaged    | Changes kept      |
+| `reset --hard`  | Moves back | Changes discarded   | Changes discarded |
+
+A simple way to remember:
+
+```text
+--soft
+"Undo the commit, but keep everything staged."
+
+--mixed
+"Undo the commit, but unstage the changes."
+
+--hard
+"Undo the commit and throw the changes away."
+```
+
+---
+
+# 15. `git revert` vs `git reset`
+
+These commands can both be used to undo changes, but they work differently.
+
+### `git revert`
 
 ```bash
-# 1. Create repository
-git init
+git revert <commit_id>
+```
 
-# 2. Check status
-git status
+Creates a **new commit** that reverses the changes from the target commit.
 
-# 3. Stage changes
+```text
+A ─── B ─── C
+          ↓
+        revert C
+          ↓
+A ─── B ─── C ─── D
+```
+
+Commit `C` still exists.
+
+Commit `D` simply undoes the changes introduced by `C`.
+
+Use this when you want to **preserve the existing history**.
+
+---
+
+### `git reset`
+
+```bash
+git reset --soft <commit_id>
+```
+
+or:
+
+```bash
+git reset --hard <commit_id>
+```
+
+moves the branch pointer backwards.
+
+```text
+Before:
+
+A ─── B ─── C
+          ↑
+        HEAD
+
+
+After reset:
+
+A ─── B
+      ↑
+    HEAD
+```
+
+The commits after `B` are no longer part of the current branch history.
+
+---
+
+# 16. Simple Rule for `revert` vs `reset`
+
+Think:
+
+```text
+git revert
+    ↓
+"I want to undo a commit
+but keep the history."
+
+git reset --soft
+    ↓
+"I want to undo the commit
+but keep its changes so I can fix/recommit them."
+
+git reset --hard
+    ↓
+"I want to go back and
+throw away those changes."
+```
+
+If the commits have already been pushed and other people are using the branch, `git revert` is generally safer because it does not rewrite the existing history.
+
+---
+
+# 17. Common Scenario — Accidentally Committed `.env`
+
+Suppose you accidentally did:
+
+```bash
 git add .
-
-# 4. Create snapshot
 git commit -m "initial commit"
-
-# 5. View snapshot history
-git log
 ```
 
-Then, whenever you make more changes:
+and your commit contains:
+
+```text
+initial commit
+├── app.py
+├── requirements.txt
+└── .env ❌
+```
+
+You realize:
+
+> ".env should not be tracked by Git."
+
+There are **two different situations**.
+
+---
+
+## Situation A — You Don't Care That `.env` Is In the Previous Commit
+
+If you simply want Git to **stop tracking `.env` from now on**, use:
 
 ```bash
-git add .
-git commit -m "describe the changes"
+git rm --cached .env
+```
+
+Then add `.env` to `.gitignore`:
+
+```bash
+echo ".env" >> .gitignore
+```
+
+Then:
+
+```bash
+git add .gitignore
+git commit -m "stop tracking env file"
+```
+
+Now:
+
+```text
+Your computer:
+
+.env ✅
+
+
+Git:
+
+.env ❌
+.gitignore ✅
+```
+
+The important thing is:
+
+> `git rm --cached .env` does NOT remove `.env` from the previous commit.
+
+It creates a new change that tells Git to stop tracking the file.
+
+The history becomes:
+
+```text
+Commit A
+├── app.py
+├── requirements.txt
+└── .env ❌ accidentally included
+
+        ↓
+
+Commit B
+├── app.py
+├── requirements.txt
+└── .gitignore
+    .env is no longer tracked
 ```
 
 ---
 
-# 16. The Core Concept
+# 18. Situation B — You Want to Fix the Latest Commit
 
-Think of Git like taking **multiple snapshots of your project**:
+If the accidental `.env` commit is the **latest commit** and you want to recreate that commit correctly, use `--soft`.
 
-```text
-Snapshot 1
-    │
-    ▼
-Snapshot 2
-    │
-    ▼
-Snapshot 3
-    │
-    ▼
-Snapshot 4
+First:
+
+```bash
+git reset --soft HEAD~1
 ```
 
-Each commit is a snapshot of the project's state at that point in time.
+This means:
 
-The important distinction is:
+> "Remove the latest commit, but keep all of its changes staged."
+
+Now remove `.env` from the staging area:
+
+```bash
+git rm --cached .env
+```
+
+Add `.env` to `.gitignore`:
+
+```bash
+echo ".env" >> .gitignore
+```
+
+Then stage the correct files:
+
+```bash
+git add .
+```
+
+Finally, create the corrected commit:
+
+```bash
+git commit -m "initial commit"
+```
+
+The result is:
 
 ```text
-git add
-    ↓
-"Which changes should be included?"
+Before:
 
-git commit
-    ↓
-"Create the snapshot."
+Commit A
+├── app.py
+├── requirements.txt
+└── .env ❌
 
-git log
-    ↓
-"Show me the snapshots."
 
-git checkout
-    ↓
-"Let me move to/view a different point in history."
+After:
 
-git revert
+Commit A'
+├── app.py
+├── requirements.txt
+└── .gitignore
+```
+
+The `.env` file still exists on your computer:
+
+```text
+.env ✅
+```
+
+but it is no longer included in the commit:
+
+```text
+Git
+└── .env ❌
+```
+
+---
+
+# 19. Why `git reset --soft` Is Useful Here
+
+The reason we use:
+
+```bash
+git reset --soft HEAD~1
+```
+
+instead of:
+
+```bash
+git reset --hard HEAD~1
+```
+
+is that we **want to keep the code changes**.
+
+We only made a mistake about **what should be included in the commit**.
+
+```text
+--soft
+
+Undo commit
     ↓
-"Create a new snapshot that undoes an old snapshot's changes."
+Keep changes
+    ↓
+Fix staging
+    ↓
+Commit again
+```
+
+Whereas:
+
+```text
+--hard
+
+Undo commit
+    ↓
+Discard changes
+    ↓
+Changes are gone
+```
+
+So for the accidental `.env` situation:
+
+```text
+"I committed the wrong files,
+but I still want my code."
+
+        ↓
+
+git reset --soft HEAD~1
+```
+
+Then fix the staging area and commit again.
+
+---
+
+# 20. Important `.env` Warning
+
+If `.env` contains secrets such as:
+
+```env
+API_KEY=...
+DATABASE_PASSWORD=...
+SECRET_KEY=...
+```
+
+and the commit has already been pushed to GitHub or another remote, **deleting the file from the latest commit is not enough**.
+
+The secret may still exist in the Git history.
+
+In that situation:
+
+1. Rotate/revoke the exposed secret.
+2. Remove the secret from the repository history if necessary.
+3. Add `.env` to `.gitignore`.
+
+For example:
+
+```gitignore
+.env
+```
+
+The important lesson is:
+
+```text
+.gitignore
+    ↓
+Prevents files from being added accidentally
+
+git rm --cached .env
+    ↓
+Stops an already-tracked file from being tracked
+
+git reset --soft
+    ↓
+Undo a commit while keeping its changes
 
 git reset --hard
     ↓
-"Move the branch back to an older snapshot."
+Undo a commit and discard its changes
+
+git revert
+    ↓
+Create a new commit that undoes another commit
 ```
