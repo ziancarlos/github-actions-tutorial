@@ -58,3 +58,5 @@ jobs:
       - name: Run Test
         working-directory: 2. Actions - Blocks And Components/starting-project
         run: npm test
+
+Ok now we know we have a test inside actions. but what if the test failed? yes we github logs the failed test and it will flag that workflow as failed.
