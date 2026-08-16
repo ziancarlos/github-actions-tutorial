@@ -10,9 +10,9 @@ jobs:
         uses: actions/setup-node@v3
         with: 
           node-version: 18  
-      - name: LS
-        run: ls -a
-      # - name: Install Dependency
-      #   uses: npm ci
-      # - name: Run Test
-      #   uses: npm test
+      - name: Change Directory To Projects
+        run: cd 2.\ Actions\ -\ Blocks\ And\ Components/starting-project/
+      - name: Install Dependency
+        uses: npm ci
+      - name: Run Test
+        uses: npm test
