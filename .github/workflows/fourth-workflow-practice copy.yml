@@ -7,4 +7,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: "Issue was created"
-      run: echo "Issue was created ${{github.repository}}"
+      run: echo "Issue was created ${{toJSON(github)}}"
