@@ -109,7 +109,7 @@ jobs:
         run: echo "deploying.."
 
 so how to runs job sequentially? or wait for another jobs to finish?
-use the needs keywoard as property and inside need has array where we can wait for multiple jobs or one
+use the needs keywoard as property and inside need has array where we can wait for multiple jobs or one. what if the job needed failed? the need job will not be executed
 
 name: Second Workflow
 on: push
@@ -151,3 +151,10 @@ jobs:
       - name: Deploy
         working-directory: 2. Actions - Blocks And Components/starting-project
         run: echo "deploying.."
+
+and inside the on keywoard we can have multiple triggers just use on keywoard like array
+-  on: [push, workflow_dispatch]
+
+
+
+https://docs.github.com/en/actions/reference/workflows-and-actions/contexts
