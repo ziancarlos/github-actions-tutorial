@@ -10,9 +10,10 @@ jobs:
         uses: actions/setup-node@v3
         with: 
           node-version: 24
-      - name: Change Directory To Projects
-        run: cd 2.\ Actions\ -\ Blocks\ And\ Components/starting-project/
       - name: Install Dependency
+        working-directory: 2. Actions - Blocks And Components/starting-project
         run: npm ci
+
       - name: Run Test
+        working-directory: 2. Actions - Blocks And Components/starting-project
         run: npm test
