@@ -1,0 +1,10 @@
+name: Fifth Workflow
+on:
+  issues:
+    types: [opened]
+jobs:
+  lint: 
+    runs-on: ubuntu-latest
+    steps:
+    - name: "Issue was created"
+      run: echo "Issue was created ${{github.repository}}"

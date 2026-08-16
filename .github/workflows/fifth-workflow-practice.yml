@@ -1,0 +1,50 @@
+name: Fourth Workflow
+on: [push]
+jobs:
+  lint: 
+    runs-on: ubuntu-latest
+    steps:
+    - name: "Get Repo"
+      uses: actions/checkout@v3
+    - name: Install Node
+      uses: actions/setup-node@v3
+      with: 
+        node-version: 24
+    - name: Install Dependency
+      working-directory: 2. Actions - Blocks And Components/practice-project
+      run: npm ci
+    - name: Lint Test
+      working-directory: 2. Actions - Blocks And Components/practice-project
+      run: npm run lint
+  test: 
+    needs: [lint]
+    runs-on: ubuntu-latest
+    steps:
+    - name: "Get Repo"
+      uses: actions/checkout@v3
+    - name: Install Node
+      uses: actions/setup-node@v3
+      with: 
+        node-version: 24
+    - name: Install Dependency
+      working-directory: 2. Actions - Blocks And Components/practice-project
+      run: npm ci
+    - name: System Integration Test
+      working-directory: 2. Actions - Blocks And Components/practice-project
+      run: npm run test
+  deploy: 
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    steps:
+    - name: "Get Repo"
+      uses: actions/checkout@v3
+    - name: Install Node
+      uses: actions/setup-node@v3
+      with: 
+        node-version: 24
+    - name: Install Dependency
+      working-directory: 2. Actions - Blocks And Components/practice-project
+      run: npm ci
+    - name: Build
+      working-directory: 2. Actions - Blocks And Components/practice-project
+      run: npm run build
