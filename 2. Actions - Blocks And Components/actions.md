@@ -34,5 +34,27 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v3
         with: 
-          node-version: 18  
+          node-version: 24  
 
+
+
+but what if we want to work with children dir not the main dir? when we try to directly do a change directory in the run statements it will not persist. the behaviour is we need to determine a working-directory on every steps. so if we need to work with a certain folder in a steps. we need to determine a working-directory in the steps. forexample
+name: Test Workflow
+on: workflow_dispatch
+jobs: 
+  first-job: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Repository
+        uses: actions/checkout@v3
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with: 
+          node-version: 24
+      - name: Install Dependency
+        working-directory: 2. Actions - Blocks And Components/starting-project
+        run: npm ci
+
+      - name: Run Test
+        working-directory: 2. Actions - Blocks And Components/starting-project
+        run: npm test
