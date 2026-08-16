@@ -59,4 +59,50 @@ jobs:
         working-directory: 2. Actions - Blocks And Components/starting-project
         run: npm test
 
-Ok now we know we have a test inside actions. but what if the test failed? yes we github logs the failed test and it will flag that workflow as failed.
+Ok now we know we have a test inside actions. but what if the test failed? yes we github logs the failed test and it will flag that workflow as failed. but how we as developer can handle this? by reverting to the old commit
+- git revert <<previous_commit_id>>
+- git add <<file_name>>
+- git commit -m "commit name"
+- git push origin <<branch_name>>
+
+ok now how can we create a second jobs? we can just add simply inside jobs and new job name.
+and will run in parallely
+name: Second Workflow
+on: push
+jobs: 
+  test: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Repository
+        uses: actions/checkout@v3
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with: 
+          node-version: 24
+      - name: Install Dependency
+        working-directory: 2. Actions - Blocks And Components/starting-project
+        run: npm ci
+
+      - name: Run Test
+        working-directory: 2. Actions - Blocks And Components/starting-project
+        run: npm test
+  deploy: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Repository
+        uses: actions/checkout@v3
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with: 
+          node-version: 24
+      - name: Install Dependency
+        working-directory: 2. Actions - Blocks And Components/starting-project
+        run: npm ci
+
+      - name: Build Project
+        working-directory: 2. Actions - Blocks And Components/starting-project
+        run: npm run build
+
+      - name: Deploy
+        working-directory: 2. Actions - Blocks And Components/starting-project
+        run: echo "deploying.."

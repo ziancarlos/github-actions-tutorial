@@ -1,7 +1,7 @@
 name: Second Workflow
-on: workflow_dispatch
+on: push
 jobs: 
-  first-job: 
+  test: 
     runs-on: ubuntu-latest
     steps:
       - name: Get Repository
@@ -17,3 +17,23 @@ jobs:
       - name: Run Test
         working-directory: 2. Actions - Blocks And Components/starting-project
         run: npm test
+  deploy: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Repository
+        uses: actions/checkout@v3
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with: 
+          node-version: 24
+      - name: Install Dependency
+        working-directory: 2. Actions - Blocks And Components/starting-project
+        run: npm ci
+
+      - name: Build Project
+        working-directory: 2. Actions - Blocks And Components/starting-project
+        run: npm run build
+
+      - name: Deploy
+        working-directory: 2. Actions - Blocks And Components/starting-project
+        run: echo "deploying.."
