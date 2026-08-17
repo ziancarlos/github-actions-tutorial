@@ -46,9 +46,8 @@ jobs:
       - name: Upload Test Report
         uses: actions/upload-artifact@v3
         with:
-          working-directory: 6. Controlling Workflow And Jobs/starting-project
           name: test-report
-          path: test.json
+          path: 6. Controlling Workflow And Jobs/starting-project/test.json
 
   build:
     needs: [test]
@@ -74,7 +73,7 @@ jobs:
         with:
           working-directory: 6. Controlling Workflow And Jobs/starting-project
           name: dist-result
-          path: dist
+          path: 6. Controlling Workflow And Jobs/starting-project/dist
 
   deploy:
     needs: [build]
