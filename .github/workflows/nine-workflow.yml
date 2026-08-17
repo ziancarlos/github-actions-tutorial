@@ -16,7 +16,7 @@ jobs:
         with:
           path: ~/.npm
           working-directory: 6. Controlling Workflow And Jobs/starting-project
-          key: node-modules-${{hashFiles(**/package-lock.json)}}
+          key: node-modules-${{hashFiles('**/package-lock.json')}}
       - name: Install Dependencies
         run: npm ci
       - name: Lint Code
@@ -34,7 +34,7 @@ jobs:
         with:
           path: ~/.npm
           working-directory: 6. Controlling Workflow And Jobs/starting-project
-          key: node-modules-${{hashFiles(**/package-lock.json)}}
+          key: node-modules-${{hashFiles('**/package-lock.json')}}
       - name: Install Dependencies
         run: npm ci
       - name: TestCode
@@ -57,7 +57,7 @@ jobs:
         with:
           path: ~/.npm
           working-directory: 6. Controlling Workflow And Jobs/starting-project
-          key: node-modules-${{hashFiles(**/package-lock.json)}}
+          key: node-modules-${{hashFiles('**/package-lock.json')}}
       - name: Install Dependencies
         run: npm ci
       - name: TestCode
