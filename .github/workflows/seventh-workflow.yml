@@ -27,7 +27,7 @@ jobs:
         working-directory: 4. Job Artifacts And Output/starting-project
         run: npm run build
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with: 
           name: dist-files
           path: |
