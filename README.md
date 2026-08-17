@@ -29,3 +29,6 @@
 
 ## 10. Create & Use Outputs Inside Jobs
 [Go to Create & Use Outputs Inside Jobs](./4.%20Job%20Artifacts%20And%20Output/output.md)
+
+## 11. Cache Dependency
+[Go to Cache Dependency](./4.%20Job%20Artifacts%20And%20Output/cache.md)
