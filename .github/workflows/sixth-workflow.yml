@@ -1,0 +1,25 @@
+name: Fourth Workflow
+on: 
+  pull_request:
+    types:
+      - opened
+  workflow_dispatch:
+    
+jobs:
+  deploy: 
+    runs-on: ubuntu-latest
+    steps:
+    - name: Output Event Data
+      run: echo "Output Event Data ${{github.event}}"
+    - name: Output Event Data
+      uses: actions/checkout@v3
+    - name: Install Node
+      uses: actions/setup-node@v3
+      with: 
+        node-version: 24
+    - name: Install Dependency
+      working-directory: 3.\ Advanced\ Workflows\ And\ Events/starting-project
+      run: npm ci
+    - name: Build Project
+      working-directory: 3.\ Advanced\ Workflows\ And\ Events/starting-project
+      run: npm run build
