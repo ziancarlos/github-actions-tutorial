@@ -5,14 +5,14 @@ on:
     - main
     - dev
 env:
-  MONGO_DB_NAME: ${secrets.MONGO_DB_NAME}
+  MONGO_DB_NAME: ${{secrets.MONGO_DB_NAME}}
 jobs:
   test:
     env:
-      MONGODB_CLUSTER_ADDRESS: ${secrets.MONGODB_CLUSTER_ADDRESS}
-      MONGODB_USERNAME: ${secrets.MONGODB_USERNAME}
-      MONGODB_PASSWORD: ${secrets.MONGODB_PASSWORD}
-      PORT: ${secrets.PORT}
+      MONGODB_CLUSTER_ADDRESS: ${{secrets.MONGODB_CLUSTER_ADDRESS}}
+      MONGODB_USERNAME: ${{secrets.MONGODB_USERNAME}}
+      MONGODB_PASSWORD: ${{secrets.MONGODB_PASSWORD}}
+      PORT: ${{secrets.PORT}}
     runs-on: ubuntu-latest
     steps:
       - name: get code

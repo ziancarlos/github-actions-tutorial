@@ -93,3 +93,5 @@ jobs:
         run: echo "${{env.MONGODB_USERNAME}}"
       - name: Echo 2
         run: echo "${{env.MONGO_DB_NAME}}"
+
+and github actions will print a secret variables as ** so dont worry people mike sneak in into ur actions tab and check the secrets.
