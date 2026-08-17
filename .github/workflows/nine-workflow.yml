@@ -63,7 +63,7 @@ jobs:
       - name: TestCode
         run: npm run build
       - name: Upload Build Results
-        uses: actions/upload-artifact
+        uses: actions/upload-artifact@v3
         with:
           name: dist-result
           path: dist
