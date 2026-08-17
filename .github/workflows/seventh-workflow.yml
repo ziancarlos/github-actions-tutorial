@@ -32,9 +32,13 @@ jobs:
           name: dist-files
           path: |
             4. Job Artifacts And Output/starting-project/dist
-            4. Job Artifacts And Output/starting-project/package.json
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy
-        run: echo "Deplying"
+      - name: Get Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-files
+      - name: ls
+        run: ls -a
+          
