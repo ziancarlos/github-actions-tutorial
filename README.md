@@ -23,3 +23,6 @@
 
 ## 8. Advanced Workflow, Jobs & Actions
 [Go to Advanced Workflow, Jobs & Actions](./3.%20Advanced%20Workflows%20And%20Events/advanced-workflow-events.md)
+
+## 9. Upload & Download Artifacts Inside Jobs
+[Go to Upload & Download Artifacts Inside Jobs](./4.%20Job%20Artifacts%20And%20Output/artifacts.md)
