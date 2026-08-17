@@ -24,8 +24,21 @@ so inside jobs we can use this
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with: 
-          name: dist-files
+          name: dist-files <- unique identifier
           path: |
             4. Job Artifacts And Output/starting-project/dist
 use actions to upload an artifact where we can specify which path we want to store
 and when we run this in the workflow runner we can get to download the specified file.
+
+
+to use the stored artifacts we can use a action called download-artifact
+where we must use with keywoard to get the specific identifier which file u want to get
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-files <- unique identifier
+      - name: ls
+        run: ls -a
