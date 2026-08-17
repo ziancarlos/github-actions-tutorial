@@ -25,7 +25,6 @@ jobs:
         run: npm run lint
         
   test:
-    needs: [lint]
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
@@ -41,9 +40,11 @@ jobs:
         working-directory: 6. Controlling Workflow And Jobs/starting-project
         run: npm ci
       - name: TestCode
+        id: trigger-test
         working-directory: 6. Controlling Workflow And Jobs/starting-project
         run: npm run test
       - name: Upload Test Report
+        # if: steps.trigger-test.output.outcome == 'failure'  
         uses: actions/upload-artifact@v4
         with:
           name: test-report
