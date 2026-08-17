@@ -34,12 +34,12 @@ jobs:
         id: cache
         uses: actions/cache@v4
         with:
-          path: ~/.npm
           working-directory: 6. Controlling Workflow And Jobs/starting-project
+          path: ~/.npm
           key: node-modules-${{hashFiles('**/package-lock.json')}}
       - name: Install Dependencies
-        run: npm ci
         working-directory: 6. Controlling Workflow And Jobs/starting-project
+        run: npm ci
       - name: TestCode
         working-directory: 6. Controlling Workflow And Jobs/starting-project
         run: npm run test
