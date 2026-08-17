@@ -44,7 +44,7 @@ jobs:
         working-directory: 6. Controlling Workflow And Jobs/starting-project
         run: npm run test
       - name: Upload Test Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-report
           path: 6. Controlling Workflow And Jobs/starting-project/test.json
@@ -69,7 +69,7 @@ jobs:
         working-directory: 6. Controlling Workflow And Jobs/starting-project
         run: npm run build
       - name: Upload Build Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           working-directory: 6. Controlling Workflow And Jobs/starting-project
           name: dist-result
@@ -80,7 +80,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get Build Artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: dist-result
       - name: Output Contents
