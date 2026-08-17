@@ -18,8 +18,8 @@ jobs:
       with: 
         node-version: 24
     - name: Install Dependency
-      working-directory: 3.\ Advanced\ Workflows\ And\ Events/starting-project
+      working-directory: 3. Advanced Workflows And Events/starting-project
       run: npm ci
     - name: Build Project
-      working-directory: 3.\ Advanced\ Workflows\ And\ Events/starting-project
+      working-directory: 3. Advanced Workflows And Events/starting-project
       run: npm run build
