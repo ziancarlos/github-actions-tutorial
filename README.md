@@ -32,3 +32,6 @@
 
 ## 11. Cache Dependency
 [Go to Cache Dependency](./4.%20Job%20Artifacts%20And%20Output/cache.md)
+
+## 12. Environment Variables, Secret, Environment With Different Secrets
+[Go to Environment Variables, Secret, Environment With Different Secrets](./5.%20Environment%20Variables%20And%20Secret//environment-variables-secrets.md)

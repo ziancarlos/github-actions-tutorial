@@ -1,13 +1,14 @@
 name: Eight Workflow
-on: 
-  push: 
-    branches:
-    - main
-    - dev
+on: workflow_dispatch
+  # push: 
+  #   branches:
+  #   - main
+  #   - dev
 env:
   MONGO_DB_NAME: ${{secrets.MONGO_DB_NAME}}
 jobs:
   test:
+    environment: test
     env:
       MONGODB_CLUSTER_ADDRESS: ${{secrets.MONGODB_CLUSTER_ADDRESS}}
       MONGODB_USERNAME: ${{secrets.MONGODB_USERNAME}}
