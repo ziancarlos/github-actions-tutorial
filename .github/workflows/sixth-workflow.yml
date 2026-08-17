@@ -1,19 +1,19 @@
 name: Fourth Workflow
 on: 
-  pull_request:
-    types:
-      - opened
-    branches:
-      - main
-      - 'dev-*'
-      - 'feat/**'
-  push:
-    branches:
-      - main
-      - 'dev-*'
-      - 'feat/**'
-    paths-ignore:
-      - './.github/workflows/*'
+  # pull_request:
+  #   types:
+  #     - opened
+  #   branches:
+  #     - main
+  #     - 'dev-*'
+  #     - 'feat/**'
+  # push:
+  #   branches:
+  #     - main
+  #     - 'dev-*'
+  #     - 'feat/**'
+  #   paths-ignore:
+  #     - './.github/workflows/*'
   workflow_dispatch:
     
 jobs:
