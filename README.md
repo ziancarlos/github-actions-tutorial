@@ -18,5 +18,8 @@
 ## 6. Types Of Events
 [Go to Types Of Events](./2.%20Actions%20-%20Blocks%20And%20Components/types-of-events.md)
 
-## 7. Advanced Workflow, Jobs & Actions
-[Go to Advanced Workflow, Jobs & Actions](./2.%20Actions%20-%20Blocks%20And%20Components/advanced-workflow-jobs-and-actions.md)
+## 7. Simple Workflow, Jobs & Actions
+[Go to Simple Workflow, Jobs & Actions](./2.%20Actions%20-%20Blocks%20And%20Components/simple-workflow-jobs-and-actions.md)
+
+## 8. Advanced Workflow, Jobs & Actions
+[Go to Advanced Workflow, Jobs & Actions](./3.%20Advanced%20Workflows%20And%20Events/advanced-workflow-events.md)
