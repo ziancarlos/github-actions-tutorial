@@ -26,3 +26,6 @@
 
 ## 9. Upload & Download Artifacts Inside Jobs
 [Go to Upload & Download Artifacts Inside Jobs](./4.%20Job%20Artifacts%20And%20Output/artifacts.md)
+
+## 10. Create & Use Outputs Inside Jobs
+[Go to Create & Use Outputs Inside Jobs](./4.%20Job%20Artifacts%20And%20Output/output.md)
