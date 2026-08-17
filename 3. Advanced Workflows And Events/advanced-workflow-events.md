@@ -48,3 +48,14 @@ we can add paths or paths ignore
 2. paths -> where if a specified dir/file has changes trigger workflow. other than the specified paths dont trigger the workflow
 
 branch that are used in push is branch that are being triggered if main the workflow checkout will use main
+
+
+cancelling an workflow can be done through github repository -> action -> which workflow -> choose cancel workflow
+
+
+skiping a workflow -> also can be done through commit message with this
+git add <<file_name>>
+git commit -m "comments description [skip ci]"
+git push origin <<branch_name>>
+
+with additional postfix of in commit message [skip ci] -> the workflows can be skipped
