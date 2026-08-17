@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Output Event Data
-      run: echo "Output Event Data ${{toJSON(github.event)}}"
+      run: echo '${{ toJSON(github.event) }}'
     - name: Checkout Code
       uses: actions/checkout@v3
     - name: Install Node
