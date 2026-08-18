@@ -1,4 +1,4 @@
-name: Nine Workflow
+name: Ten Workflow
 on:
   push:
     branches:
