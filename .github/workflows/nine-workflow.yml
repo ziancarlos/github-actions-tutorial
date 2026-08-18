@@ -44,7 +44,7 @@ jobs:
         working-directory: 6. Controlling Workflow And Jobs/starting-project
         run: npm run test
       - name: Upload Test Report
-        if: failure() && steps.trigger-test.outcome == 'failure'  
+        if: steps.trigger-test.outcome == 'failure'  
         uses: actions/upload-artifact@v4
         with:
           name: test-report
@@ -88,3 +88,12 @@ jobs:
         run: ls
       - name: Deploy
         run: echo "Deploying"
+
+  report:
+    needs: [lint, deploy]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output Information
+        run: |
+          echo "Something when wrong"
+          echo "${{toJSON(github)}}"
