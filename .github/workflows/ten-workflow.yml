@@ -60,9 +60,8 @@ jobs:
         id: cache
         uses: actions/cache@v4
         with:
-          path: ~/.npm
-          working-directory: 6. Controlling Workflow And Jobs/starting-project
-          key: node-modules-${{hashFiles('**/package-lock.json')}}
+          path: 6. Controlling Workflow And Jobs/starting-project/node_modules
+          key: node-modules-${{hashFiles('6. Controlling Workflow And Jobs/starting-project/package-lock.json')}}
       - name: Install Dependencies
         working-directory: 6. Controlling Workflow And Jobs/starting-project
         if: steps.cache.outputs.cache-hit != 'true'
