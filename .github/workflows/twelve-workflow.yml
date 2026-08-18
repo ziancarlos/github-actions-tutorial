@@ -1,8 +1,18 @@
 name: Reusable Workflow
-on: workflow_call
+on: 
+  workflow_call:
+    inputs:
+      file_name: 
+        description: file_name
+        default: dist
+        type: string
 jobs: 
   info:
     runs-on: ubuntu-latest
     steps:
       - name: Echoing
-        run: echo "Deploying And Uploading"
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{inputs.file_name}}
+      - name: echo
+        run: ls -a
