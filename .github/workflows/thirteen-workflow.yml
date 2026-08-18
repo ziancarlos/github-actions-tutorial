@@ -82,6 +82,13 @@ jobs:
     uses: ./.github/workflows/twelve-workflow.yml
     with:
       file_name: dist-result
+
+  print-deploy-result:
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Echoing"
+        run: echo "${{needs.deploy.outputs.return_name}}"
   report:
     if: failure()
     needs: [lint, deploy]

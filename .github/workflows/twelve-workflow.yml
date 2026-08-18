@@ -6,8 +6,15 @@ on:
         description: file_name
         default: dist
         type: string
+    outputs:
+      return_name:
+        description: return name
+        value: ${{jobs.outputs.outcome}}
 jobs: 
+
   info:
+    outputs:
+      outcome: ${{steps.step-result.outputs.return_name}}
     runs-on: ubuntu-latest
     steps:
       - name: Echoing
@@ -16,3 +23,6 @@ jobs:
           name: ${{inputs.file_name}}
       - name: echo
         run: ls -a
+      - name: result output
+        id: step-result
+        run: echo "return_name=success" >> $GITHUB_OUTPUT

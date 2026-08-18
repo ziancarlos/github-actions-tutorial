@@ -45,12 +45,33 @@ to pass an input from a jobs is using with keywoard with the variable_name
     uses: ./.github/workflows/twelve-workflow.yml
     with:
       file_name: dist-result
-  report:
-    if: failure()
-    needs: [lint, deploy]
+or if inputs are sensitive like secrets value
+on: 
+  workflow_call:
+    inputs:
+      file_name: 
+        description: file_name
+        default: dist
+        type: string
+    secrets:
+        secret_name:
+            required: true
+jobs: 
+  info:
     runs-on: ubuntu-latest
     steps:
-      - name: Output Information
-        run: |
-          echo "Something when wrong"
-          echo "${{toJSON(github)}}"
+      - name: Echoing
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{inputs.file_name}}
+      - name: echo
+        run: ls -a
+
+to pass a secret to workflow 
+  deploy:
+    needs: [build]
+    uses: ./.github/workflows/twelve-workflow.yml
+    with:
+      file_name: dist-result
+    secrets:
+        secret_name: ${{secrets.secret_name}}
