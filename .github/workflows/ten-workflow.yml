@@ -42,11 +42,11 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: TestCode
+        continue-on-error: true
         id: trigger-test
         working-directory: 6. Controlling Workflow And Jobs/starting-project
         run: npm run test
       - name: Upload Test Report
-        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: test-report
