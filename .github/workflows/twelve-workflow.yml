@@ -9,9 +9,8 @@ on:
     outputs:
       return_name:
         description: return name
-        value: ${{jobs.outputs.outcome}}
+        value: ${{jobs.info.outputs.outcome}}
 jobs: 
-
   info:
     outputs:
       outcome: ${{steps.step-result.outputs.return_name}}
@@ -25,4 +24,4 @@ jobs:
         run: ls -a
       - name: result output
         id: step-result
-        run: echo "return_name=success" >> $GITHUB_OUTPUT
+        run: echo "return_name=success" >> "$GITHUB_OUTPUT"

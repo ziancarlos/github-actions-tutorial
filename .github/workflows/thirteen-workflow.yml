@@ -75,8 +75,7 @@ jobs:
           working-directory: 6. Controlling Workflow And Jobs/starting-project
           name: dist-result
           path: 6. Controlling Workflow And Jobs/starting-project/dist
-
-
+  
   deploy:
     needs: [build]
     uses: ./.github/workflows/twelve-workflow.yml
