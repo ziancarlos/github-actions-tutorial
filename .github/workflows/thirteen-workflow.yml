@@ -1,0 +1,91 @@
+name: Ten Workflow
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Cache Dependenies
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: 6. Controlling Workflow And Jobs/starting-project/node_modules
+          key: node-modules-${{hashFiles('6. Controlling Workflow And Jobs/starting-project/package-lock.json')}}
+      - name: Install Dependencies
+        working-directory: 6. Controlling Workflow And Jobs/starting-project
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Lint Code
+        working-directory: 6. Controlling Workflow And Jobs/starting-project
+        run: npm run lint
+        
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Cache Dependenies
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: 6. Controlling Workflow And Jobs/starting-project/node_modules
+          key: node-modules-${{hashFiles('6. Controlling Workflow And Jobs/starting-project/package-lock.json')}}
+      - name: Install Dependencies
+        working-directory: 6. Controlling Workflow And Jobs/starting-project
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: TestCode
+        continue-on-error: true
+        id: trigger-test
+        working-directory: 6. Controlling Workflow And Jobs/starting-project
+        run: npm run test
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: 6. Controlling Workflow And Jobs/starting-project/test.json
+
+  build:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Cache Dependenies
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: 6. Controlling Workflow And Jobs/starting-project/node_modules
+          key: node-modules-${{hashFiles('6. Controlling Workflow And Jobs/starting-project/package-lock.json')}}
+      - name: Install Dependencies
+        working-directory: 6. Controlling Workflow And Jobs/starting-project
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: TestCode
+        working-directory: 6. Controlling Workflow And Jobs/starting-project
+        run: npm run build
+      - name: Upload Build Results
+        uses: actions/upload-artifact@v4
+        with:
+          working-directory: 6. Controlling Workflow And Jobs/starting-project
+          name: dist-result
+          path: 6. Controlling Workflow And Jobs/starting-project/dist
+
+  deploy:
+    needs: [build]
+    uses: ./.github/workflows/twelve-workflow.yml
+
+  report:
+    if: failure()
+    needs: [lint, deploy]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output Information
+        run: |
+          echo "Something when wrong"
+          echo "${{toJSON(github)}}"
