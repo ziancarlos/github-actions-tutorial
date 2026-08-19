@@ -24,15 +24,15 @@ jobs:
         id: cache
         uses: actions/cache@v4
         with:
-          path: 7. Jobs And Docker Container/starting-project/node_modules
-          key: node-modules-${{hashFiles('7. Jobs And Docker Container/starting-project/package-lock.json')}}
+          path: 7-jobs-and-docker-container/starting-project/node_modules
+          key: node-modules-${{hashFiles('7-jobs-and-docker-container/starting-project/package-lock.json')}}
       - name: Install Dependencies
-        working-directory: 7. Jobs And Docker Container/starting-project
+        working-directory: 7-jobs-and-docker-container/starting-project
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Run Server
-        working-directory: 7. Jobs And Docker Container/starting-project
+        working-directory: 7-jobs-and-docker-container/starting-project
         run: npm start & npx wait-on http://127.0.0.1:$PORT
       - name: Run Test
-        working-directory: 7. Jobs And Docker Container/starting-project
+        working-directory: 7-jobs-and-docker-container/starting-project
         run: npm test
