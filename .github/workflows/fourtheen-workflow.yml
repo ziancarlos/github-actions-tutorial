@@ -4,6 +4,10 @@ on:
     branches:
       - main
       - dev
+permissions:
+  contents: read
+  packages: write
+
 env:
   MONGODB_DB_NAME: gha_demo
 jobs:
