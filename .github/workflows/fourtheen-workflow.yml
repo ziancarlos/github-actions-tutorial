@@ -4,6 +4,8 @@ on:
     branches:
       - main
       - dev
+env:
+  MONGO_DB_NAME: gha_demo
 jobs:
   test:
     environment: test
