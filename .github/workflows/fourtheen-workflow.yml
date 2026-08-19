@@ -42,3 +42,17 @@ jobs:
       - name: Run Test
         working-directory: 7-jobs-and-docker-container/starting-project
         run: npm test
+  deployment: 
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
+      - name: Login to GHCR
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: Build Docker Image
+        working-directory: 7-jobs-and-docker-container/starting-project
+        run: docker build -t ghcr.io/ziancarlos/custom-app:${{ github.sha }} .
+      - name: Push Docker Image
+        working-directory: 7-jobs-and-docker-container/starting-project
+        run: docker push ghcr.io/ziancarlos/custom-app:${{ github.sha }}
