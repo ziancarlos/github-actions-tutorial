@@ -1,8 +1,8 @@
-name: Ten Workflow
-on: 
-  push:
-    branches:
-      - main
+name: 13 Workflow
+on: workflow_dispatch
+  # push:
+  #   branches:
+  #     - main
 
 jobs:
   lint:

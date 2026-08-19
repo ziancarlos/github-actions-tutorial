@@ -1,0 +1,35 @@
+name: Deployment With Docker
+on: 
+  push:
+    branches:
+      - main
+      - dev
+jobs:
+  test:
+    environment: test
+    runs-on: ubuntu-latest
+    env: 
+      MONGODB_CONNECTION_PROTOCOL: mongodb+srv
+      MONGODB_CLUSTER_ADDRESS: cluster0.13dgjsx.mongodb.net
+      MONGODB_USERNAME: ${{secrets.MONGODB_USERNAME}} 
+      MONGODB_PASSWORD: ${{secrets.MONGODB_USERNAME}}
+      PORT: 8080
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Cache Dependenies
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: 7. Jobs And Docker Container/starting-project/node_modules
+          key: node-modules-${{hashFiles('7. Jobs And Docker Container/starting-project/package-lock.json')}}
+      - name: Install Dependencies
+        working-directory: 7. Jobs And Docker Container/starting-project
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Run Server
+        working-directory: 7. Jobs And Docker Container/starting-project
+        run: npm start && npx wait-on http://localhost:$PORT
+      - name: Run Test
+        working-directory: 7. Jobs And Docker Container/starting-project
+        run: npm test

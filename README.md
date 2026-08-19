@@ -35,3 +35,12 @@
 
 ## 12. Environment Variables, Secret, Environment With Different Secrets
 [Go to Environment Variables, Secret, Environment With Different Secrets](./5.%20Environment%20Variables%20And%20Secret//environment-variables-secrets.md)
+
+## 13. Controlling Workflow Or Jobs
+[Go to Controlling Workflow Or Jobs](./6.%20Controlling%20Workflow%20And%20Jobs/controlling-workflow-or-jobs.md)
+
+## 14. Matrix Normally To Test Different Environments (Simmilar To Hyperparameter Tuning In ML) 
+[Go to Matrix Normally To Test Different Environments (Simmilar To Hyperparameter Tuning In ML) ](./6.%20Controlling%20Workflow%20And%20Jobs/matrix.md)
+
+## 15. Reusable Workflows
+[Go to Reusable Workflows](./6.%20Controlling%20Workflow%20And%20Jobs/reusable-workflow.md)
