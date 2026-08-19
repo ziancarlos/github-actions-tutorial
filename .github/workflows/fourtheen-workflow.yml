@@ -14,7 +14,7 @@ jobs:
       MONGODB_CONNECTION_PROTOCOL: mongodb+srv
       MONGODB_CLUSTER_ADDRESS: cluster0.13dgjsx.mongodb.net
       MONGODB_USERNAME: ${{secrets.MONGODB_USERNAME}} 
-      MONGODB_PASSWORD: ${{secrets.MONGODB_USERNAME}}
+      MONGODB_PASSWORD: ${{secrets.MONGODB_PASSWORD}}
       PORT: 8080
     steps:
       - name: Checkout Code
