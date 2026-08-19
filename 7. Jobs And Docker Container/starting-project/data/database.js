@@ -5,6 +5,7 @@ const clusterAddress = process.env.MONGODB_CLUSTER_ADDRESS;
 const dbUser = process.env.MONGODB_USERNAME;
 const dbPassword = process.env.MONGODB_PASSWORD;
 const dbName = process.env.MONGODB_DB_NAME;
+const port = process.env.PORT;
 
 const uri = `${connectionProtocol}://${dbUser}:${dbPassword}@${clusterAddress}/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri);
@@ -16,6 +17,7 @@ console.log(clusterAddress);
 console.log(dbUser);
 console.log(dbPassword);
 console.log(dbName);
+console.log(port);
 try {
   await client.connect();
   await client.db(dbName).command({ ping: 1 });
