@@ -31,7 +31,7 @@ jobs:
         run: npm ci
       - name: Run Server
         working-directory: 7. Jobs And Docker Container/starting-project
-        run: npm start && npx wait-on http://127.0.0.1:$PORT
+        run: npm start & npx wait-on http://127.0.0.1:$PORT
       - name: Run Test
         working-directory: 7. Jobs And Docker Container/starting-project
         run: npm test
