@@ -46,7 +46,10 @@
 [Go to Reusable Workflows](./6.%20Controlling%20Workflow%20And%20Jobs/reusable-workflow.md)
 
 ## 16. Docker Refreshments
-[Go to Docker Refreshments](./7.%20Jobs%20And%20Docker%20Container/simple-docker-intro.md)
+[Go to Docker Refreshments](./7-jobs-and-docker-container/simple-docker-intro.md)
 
 ## 17. Docker With Github Actions
-[Go to Docker Refreshments](./7.%20Jobs%20And%20Docker%20Container/simple-docker-intro.md)
+[Go to  Docker With Github Actions](./7-jobs-and-docker-container/docker-with-actions.md)
+
+## 18. Deployment With GHCR & Action
+[Go to Deployment With GHCR & Action](./7-jobs-and-docker-container/deployment-with-actions-ghcr.md)

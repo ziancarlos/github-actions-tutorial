@@ -507,3 +507,5 @@ services:
 ```
 
 Service containers are especially useful for CI and integration testing because they are temporary and are removed when the GitHub Actions job finishes.
+
+
