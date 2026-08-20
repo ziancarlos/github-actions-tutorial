@@ -53,3 +53,6 @@
 
 ## 18. Deployment With GHCR & Action
 [Go to Deployment With GHCR & Action](./7-jobs-and-docker-container/deployment-with-actions-ghcr.md)
+
+## 19. SSH Key Pair To Access VPS Inside Actions
+[Go to SSH Key Pair To Access VPS Inside Actions](./8-ssh-key-pair.md)
